@@ -1,5 +1,6 @@
 import React from "react";
 import {FcLike} from 'react-icons/fc'
+import { NavLink } from "react-router-dom";
 
 const SingleChef = ({ chef }) => {
   return (
@@ -17,9 +18,9 @@ const SingleChef = ({ chef }) => {
         <p className="text-gray-700 text-base mb-2 flex items-center gap-2">
           <FcLike /> { chef.likes}
         </p>
-        <button className="btn bg-orange-500 border-none">
+        <NavLink className="btn bg-orange-500 border-none">
           View Recipes
-        </button>
+        </NavLink>
       </div>
     </div>
   );

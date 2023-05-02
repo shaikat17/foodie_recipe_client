@@ -5,6 +5,7 @@ const Register = () => {
     const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,7 +13,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create an account</h2>
       </div>
@@ -21,26 +22,26 @@ const Register = () => {
         <div className=" py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="first-name" className="block text-sm font-medium text-slate-200">
+              <label htmlFor="user-name" className="block text-sm font-medium text-gray-700">
                 User Name
               </label>
               <div className="mt-1">
                 <input
-                  id="first-name"
-                  name="first-name"
+                  id="user-name"
+                  name="user-name"
                   type="text"
                   autoComplete="given-name"
                   required
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-orange-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  placeholder="Enter your first name"
+                  placeholder="Enter your user name"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="email-address" className="block text-sm font-medium text-slate-200">
+              <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <div className="mt-1">
@@ -59,7 +60,26 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-200">
+              <label htmlFor="photo-url" className="block text-sm font-medium text-gray-700">
+                Photo URL
+              </label>
+              <div className="mt-1">
+                <input
+                  id="photo-url"
+                  name="photo-url"
+                  type="text"
+                  autoComplete="given-name"
+                  required
+                  value={photoUrl}
+                  onChange={(e) => setPhotoUrl(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-orange-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your photo url"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="mt-1">

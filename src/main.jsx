@@ -9,22 +9,45 @@ import './index.css'
 import Error from './pages/Error.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import Home from './pages/Home.jsx'
 import { ContextProvider } from './context/Context.jsx';
+import Layout from './layout/Layout.jsx';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <Error />
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      }
+    ]
   },
   {
-    path: "login",
-    element: <Login />
+    path: "/login",
+    element: <Layout />,
+    children: [
+      {
+        path: "/login",
+        element: <Login/>
+      }
+    ]
   },
   {
-    path: "register",
-    element: <Register />
+    path: "/register",
+    element: <Layout />,
+    children: [
+      {
+        path: "/register",
+        element: <Register/>
+      }
+    ]
+  },
+  {
+    path: "chefs-recipes"
   }
 ]);
 

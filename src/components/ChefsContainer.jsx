@@ -4,24 +4,8 @@ import { useGlobalContext } from "../context/Context";
 import { ColorRing } from "react-loader-spinner";
 
 const ChefsContainer = () => {
-  const [data, setData] = useState([]);
 
-  const { loading, setLoading } = useGlobalContext();
-  //   console.log(dataValue);
-
-  const chefsData = async () => {
-    const response = await fetch("chefs.json");
-    const data = await response.json();
-
-    // console.log(data);
-    setData(data);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    chefsData();
-  }, []);
+  const { loading, data } = useGlobalContext();
 
   return (
     <section className="my-7">
