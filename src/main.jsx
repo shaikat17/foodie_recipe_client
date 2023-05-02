@@ -9,6 +9,7 @@ import './index.css'
 import Error from './pages/Error.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import { ContextProvider } from './context/Context.jsx';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ContextProvider>
     <RouterProvider router={router} />
+    </ContextProvider>
   </React.StrictMode>,
 )
