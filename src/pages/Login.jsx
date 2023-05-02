@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FcGoogle } from 'react-icons/fc'
-import { FaGithub } from 'react-icons/fa'
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -21,13 +21,17 @@ function Login() {
           </h2>
         </div>
         <div className="flex flex-col gap-y-2">
-            <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center"><FcGoogle /> Sign In with Google</NavLink>
-            <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center"><FaGithub /> Sign In with Github</NavLink>
+          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">
+            <FcGoogle /> Sign In with Google
+          </NavLink>
+          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">
+            <FaGithub /> Sign In with Github
+          </NavLink>
         </div>
         <p className="text-center">Or</p>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-sm ">
             <div>
               <label htmlFor="email-address">Email address</label>
               <input
@@ -60,7 +64,13 @@ function Login() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <p>Don't have an account?</p> <NavLink className="bg-orange-500 text-slate-200 ml-2 p-1 rounded" to="/register">Register</NavLink>
+              <p>Don't have an account?</p>{" "}
+              <NavLink
+                className="bg-orange-500 text-slate-200 ml-2 p-1 rounded"
+                to="/register"
+              >
+                Register
+              </NavLink>
             </div>
 
             <div className="text-sm">
