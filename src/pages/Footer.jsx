@@ -29,10 +29,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="p-7 border-t flex flex-col md:flex-row justify-center items-center">
-        <div className="w-3/5">
+        <div className="md:w-3/5">
         &copy;Foodie
         </div>
-        <div className="flex w-2/5 items-center justify-center ">
+        <div className="flex md:w-2/5 items-center justify-center ">
             <ul className="flex space-x-3">
                 <li>Home /</li>
                 <li>About Us /</li>

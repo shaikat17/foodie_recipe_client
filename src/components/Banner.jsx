@@ -5,13 +5,13 @@ import { NavLink } from "react-router-dom";
 const Banner = () => {
   return (
     <section
-      className="flex flex-col justify-center items-center h-screen bg-cover bg-no-repeat bg-center opacity-60 space-y-3"
+      className="flex flex-col justify-center items-center h-screen bg-cover bg-no-repeat bg-center space-y-3"
       style={{ backgroundImage: `url(${home_bg})` }}
     >
-      <h1 className="font-cursive text-5xl text-white font-black">
+      <h1 className="font-cursive text-6xl text-orange-500 font-black">
         Our Most Popular
       </h1>
-      <p className="font-bold text-4xl text-white">Recipes</p>
+      <p className="font-bold text-4xl text-orange-500">Recipes</p>
       <NavLink className="btn bg-orange-500 outline-none text-white border-none">
         Explore Now
       </NavLink>
