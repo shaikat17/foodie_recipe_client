@@ -18,7 +18,7 @@ const SingleChef = ({ chef }) => {
         <p className="text-gray-700 text-base mb-2 flex items-center gap-2">
           <FcLike /> { chef.likes}
         </p>
-        <NavLink className="btn bg-orange-500 border-none">
+        <NavLink to={`/chef-recipes/${chef.id}`} className="btn bg-orange-500 border-none">
           View Recipes
         </NavLink>
       </div>

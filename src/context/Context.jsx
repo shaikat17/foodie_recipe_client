@@ -1,33 +1,38 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 
-const Context = createContext()
+const AppContext = createContext();
 
 const ContextProvider = ({ children }) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
 
-    // fetch chefs data
-    const chefsData = async () => {
-        const response = await fetch("https://foodie-server-shaikatpal56-gmailcom.vercel.app/chefs");
-        const data = await response.json();
+  // fetch chefs data
+  const chefsData = async () => {
+    const response = await fetch(
+      "https://foodie-server-shaikatpal56-gmailcom.vercel.app/chefs"
+    );
     
-        // console.log(data);
-        setData(data);
-        setLoading(false);
-      };
+    const data = await response.json();
 
-      useEffect(() => {
-        setLoading(true);
-        chefsData();
-      }, []);
+    // console.log(data);
+    setData(data);
+    setLoading(false);
+  };
 
-    return (
-        <Context.Provider value={{loading, data}}>{children}</Context.Provider>
-    )
+  useEffect(() => {
+    setLoading(true);
+    chefsData();
+  }, []);
+
+
+  return (
+    <AppContext.Provider value={{ loading, data, chefsData, setLoading }}>{children}</AppContext.Provider>
+  );
+};
+
+export const useGlobalContext = () => {
+    return useContext(AppContext)
 }
 
-const useGlobalContext = () => {
-    return useContext(Context)
-}
-
-export {useGlobalContext, ContextProvider};
+export { AppContext, ContextProvider }

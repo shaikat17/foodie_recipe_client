@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Register = () => {
@@ -9,7 +9,7 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`First Name: ${firstName} Last Name: ${lastName} Email: ${email} Password: ${password}`);
+    console.log(`First Name: ${userName} Last Name: ${photoUrl} Email: ${email} Password: ${password}`);
   };
 
   return (

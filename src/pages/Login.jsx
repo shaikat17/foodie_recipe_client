@@ -64,7 +64,7 @@ function Login() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <p>Don't have an account?</p>{" "}
+              <p>Don't have an account?</p>
               <NavLink
                 className="bg-orange-500 text-slate-200 ml-2 p-1 rounded"
                 to="/register"

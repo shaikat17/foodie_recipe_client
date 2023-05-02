@@ -1,6 +1,5 @@
-import React from 'react';
+
 import Banner from '../components/Banner';
-import Footer from './Footer';
 import ChefsContainer from '../components/ChefsContainer';
 
 const Home = () => {
@@ -8,7 +7,6 @@ const Home = () => {
         <div>
             <Banner />
             <ChefsContainer />
-            <Footer />
         </div>
     );
 };

@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@fontsource/roboto": "^4.5.8",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@mui/material": "^5.12.3",
     "daisyui": "^2.51.6",
     "firebase": "^9.21.0",
     "localforage": "^1.10.0",

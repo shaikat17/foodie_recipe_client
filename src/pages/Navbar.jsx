@@ -1,4 +1,4 @@
-import React from "react";
+
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -27,19 +27,19 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
+              <NavLink to="/" className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
             </li>
             <li>
               <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Blog</NavLink>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-4xl"><span className="text-orange-500 text-5xl">F</span>oo<span className="text-orange-500 text-5xl">d</span>ie</a>
+        <NavLink to="/" className="btn btn-ghost normal-case text-4xl"><span className="text-orange-500 text-5xl">F</span>oo<span className="text-orange-500 text-5xl">d</span>ie</NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
+            <NavLink to="/" className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
           </li>
           <li>
             <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Blog</NavLink>
