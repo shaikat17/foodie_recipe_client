@@ -9,7 +9,7 @@ const Register = () => {
   const [photoUrl, setPhotoUrl] = useState('');
   const [error, setError] = useState('')
 
-  const { createUser } = useGlobalContext()
+  const { createUser, updateUserProfile } = useGlobalContext()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +23,9 @@ const Register = () => {
     .then(result => {
       const loggedUser = result.user
       console.log(loggedUser)
+      updateUserProfile(loggedUser, userName, photoUrl)
+      .then(updateResult => console.log(updateResult))
+      .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
   };
