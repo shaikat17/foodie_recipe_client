@@ -1,9 +1,12 @@
-
 import { NavLink } from "react-router-dom";
 import { useGlobalContext } from "../context/Context";
 
 const Navbar = () => {
-  const {user} = useGlobalContext()
+  const { user, logOut, loading } = useGlobalContext();
+
+  const handleLogout = () => {
+    logOut()
+  };
   return (
     <div className="navbar bg-gray-100">
       <div className="navbar-start">
@@ -29,27 +32,72 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink to="/" className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                    : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+                }
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Blog</NavLink>
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                    : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+                }
+              >
+                Blog
+              </NavLink>
             </li>
           </ul>
         </div>
-        <NavLink to="/" className="btn btn-ghost normal-case text-4xl"><span className="text-orange-500 text-5xl">F</span>oo<span className="text-orange-500 text-5xl">d</span>ie</NavLink>
+        <NavLink to="/" className="btn btn-ghost normal-case text-4xl">
+          <span className="text-orange-500 text-5xl">F</span>oo
+          <span className="text-orange-500 text-5xl">d</span>ie
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <NavLink to="/" className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                  : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink className="bg-transparent ml-2 uppercase text-gray-700 font-medium">Blog</NavLink>
+            <NavLink
+              to="/blog"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                  : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+              }
+            >
+              Blog
+            </NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink className="btn" to="/login">Login</NavLink>
+        {user ? (
+          <button className="btn" onClick={handleLogout}>Logout</button>
+        ) : (
+          <NavLink className="btn" to="/login">
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
   );

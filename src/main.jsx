@@ -1,24 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-import App from './App.jsx'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import './index.css'
-import { ContextProvider } from './context/Context.jsx';
-import Error from './pages/Error.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import Home from './pages/Home.jsx'
-import Layout from './layout/Layout.jsx';
-import ChefRecipes from './components/ChefRecipes.jsx';
-
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import { ContextProvider } from "./context/Context.jsx";
+import Error from "./pages/Error.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Home from "./pages/Home.jsx";
+import Layout from "./layout/Layout.jsx";
+import ChefRecipes from "./components/ChefRecipes.jsx";
+import Blog from "./pages/Blog.jsx";
+import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,9 +26,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
-      }
-    ]
+        element: <Home />,
+      },
+    ],
   },
   {
     path: "/login",
@@ -38,9 +36,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/login",
-        element: <Login/>
-      }
-    ]
+        element: <Login />,
+      },
+    ],
   },
   {
     path: "/register",
@@ -48,27 +46,36 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/register",
-        element: <Register/>
-      }
-    ]
+        element: <Register />,
+      },
+    ],
   },
   {
     path: "/chef-recipes",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: "/chef-recipes/:id",
-        element: <ChefRecipes />
-      }
-    ]
-  }
+        element: <PrivateRoute><ChefRecipes /></PrivateRoute>,
+      },
+    ],
+  },
+  {
+    path: "/blog",
+    element: <Layout />,
+    children: [
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+    ],
+  },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ContextProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </ContextProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

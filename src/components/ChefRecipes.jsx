@@ -10,25 +10,27 @@ const ChefRecipes = () => {
   const [chefRecipes, setChefRecipes] = useState([])
   const { id } = useParams();
 
-  const { chefsData, loading, setLoading, recipes } =
+  const { loading, setLoading } =
     useGlobalContext();
 
+    // console.log(loading)
+
     const getChefData = async () => {
-      setLoading(true)
+      // setLoading(true)
       const response = await fetch(`https://foodie-server-shaikatpal56-gmailcom.vercel.app/chefs/${id}`)
       const data = await response.json()
       // console.log(data)
       if(data) setChefData(data)
-      setLoading(false)
+      // setLoading(false)
     }
 
     const getRecipes = async () => {
-      setLoading(true)
+      // setLoading(true)
       const response = await fetch(`https://foodie-server-shaikatpal56-gmailcom.vercel.app/recipes/${id}`)
       const data = await response.json()
   
       if(data) setChefRecipes(data)
-      setLoading(false)
+      // setLoading(false)
   
     }
 
@@ -39,29 +41,29 @@ const ChefRecipes = () => {
     }, [])
 
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center">
-        <ColorRing
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="blocks-loading"
-          wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-        />
-      </div>
-    );
-  } 
+  // if (loading) {
+  //   return (
+  //     <div className="flex items-center justify-center">
+  //       <ColorRing
+  //         visible={true}
+  //         height="80"
+  //         width="80"
+  //         ariaLabel="blocks-loading"
+  //         wrapperStyle={{}}
+  //         wrapperClass="blocks-wrapper"
+  //         colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+  //       />
+  //     </div>
+  //   );
+  // } 
 
   return (
     <>
     <div className="card card-side bg-base-100 shadow-xl p-3">
-      <figure className="w-2/4">
+      <figure className="w-2/5">
         <img src={chefData.image} className="h-full " alt="Movie" />
       </figure>
-      <div className="card-body">
+      <div className="card-body w-3/5">
         <div className="font-bold text-xl mb-2 flex items-center gap-2">
           Name: {chefData.name}
         </div>

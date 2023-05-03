@@ -1,35 +1,59 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { ColorRing } from "react-loader-spinner";
 import { useGlobalContext } from "../context/Context";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
-  const { signWithGoogle, user} = useGlobalContext()
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/'
+
+  const { signWithGoogle, user, setLoading, loading } = useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setError('')
+    setError("");
     console.log(`Email: ${email} Password: ${password}`);
-    if(password.length < 6) {
-      setError('Your Password should be more than or equal to 6 characters')
-      return
+    if (password.length < 6) {
+      setError("Your Password should be more than or equal to 6 characters");
+      return;
     }
   };
 
   const handleGoogleSignin = () => {
+    // setLoading(true)
     signWithGoogle()
-    .then(result => {
-      const loggedUser = result.user
-      console.log(loggedUser)
-      
-    })
-    .catch(error => console.log(error))
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate(from, { replace: true })
+        // setLoading(false)
+      })
+      .catch((error) => console.log(error));
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center">
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        />
+      </div>
+    );
   }
 
   return (
@@ -42,7 +66,10 @@ function Login() {
           </h2>
         </div>
         <div className="flex flex-col gap-y-2">
-          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center" onClick={handleGoogleSignin}>
+          <NavLink
+            className="flex justify-around w-full border border-orange-500 p-2 items-center"
+            onClick={handleGoogleSignin}
+          >
             <FcGoogle /> Sign In with Google
           </NavLink>
           <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">

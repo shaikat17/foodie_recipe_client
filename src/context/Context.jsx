@@ -9,7 +9,7 @@ const ContextProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null)
   
 
@@ -23,16 +23,16 @@ const ContextProvider = ({ children }) => {
 
     // console.log(data);
     setData(data);
-    setLoading(false);
+    // setLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     chefsData();
   }, []);
 
   const signWithGoogle = () => {
-    
+    setLoading(true)
     return signInWithPopup(auth, googleProvider)
   }
 
@@ -43,10 +43,11 @@ const ContextProvider = ({ children }) => {
 
   // observe auth state change
   useEffect( () =>{
+    // setLoading(true)
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-        console.log('auth state change', currentUser);
+        // console.log('auth state change', currentUser);
         setUser(currentUser);
-        // setLoading(false);
+        setLoading(false)
     });
 
     return () =>{
