@@ -1,20 +1,36 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useGlobalContext } from '../context/Context';
 
 const Register = () => {
     const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
+  const [error, setError] = useState('')
+
+  const { createUser } = useGlobalContext()
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`First Name: ${userName} Last Name: ${photoUrl} Email: ${email} Password: ${password}`);
+
+    setError("");
+    if (password.length < 6) {
+      setError("Your Password should be more than or equal to 6 characters");
+      return;
+    }
+    createUser(email, password)
+    .then(result => {
+      const loggedUser = result.user
+      console.log(loggedUser)
+    })
+    .catch(err => console.log(err))
   };
 
   return (
     <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      {error && <p className="text-red-600">{error}</p>}
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create an account</h2>
       </div>
 

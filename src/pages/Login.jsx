@@ -15,7 +15,7 @@ function Login() {
 
   const from = location.state?.from?.pathname || '/'
 
-  const { signWithGoogle, user, setLoading, loading } = useGlobalContext();
+  const { signWithGoogle, user, setLoading, loading, signin } = useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,6 +26,14 @@ function Login() {
       setError("Your Password should be more than or equal to 6 characters");
       return;
     }
+
+    signin(email, password)
+    .then(result => {
+      const loggedUser = result.user
+      console.log(loggedUser)
+      navigate(from, { replace: true })
+    })
+    .catch(err => console.log(err))
   };
 
   const handleGoogleSignin = () => {
