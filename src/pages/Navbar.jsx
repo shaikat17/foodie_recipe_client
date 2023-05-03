@@ -1,7 +1,9 @@
 
 import { NavLink } from "react-router-dom";
+import { useGlobalContext } from "../context/Context";
 
 const Navbar = () => {
+  const {user} = useGlobalContext()
   return (
     <div className="navbar bg-gray-100">
       <div className="navbar-start">

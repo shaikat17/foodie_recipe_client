@@ -2,26 +2,47 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { useGlobalContext } from "../context/Context";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('')
+
+  const { signWithGoogle, user} = useGlobalContext()
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    setError('')
     console.log(`Email: ${email} Password: ${password}`);
+    if(password.length < 6) {
+      setError('Your Password should be more than or equal to 6 characters')
+      return
+    }
   };
+
+  const handleGoogleSignin = () => {
+    signWithGoogle()
+    .then(result => {
+      const loggedUser = result.user
+      console.log(loggedUser)
+      
+    })
+    .catch(error => console.log(error))
+  }
 
   return (
     <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
+          {error && <p className="text-red-600">{error}</p>}
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
         </div>
         <div className="flex flex-col gap-y-2">
-          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">
+          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center" onClick={handleGoogleSignin}>
             <FcGoogle /> Sign In with Google
           </NavLink>
           <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">

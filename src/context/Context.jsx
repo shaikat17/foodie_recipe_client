@@ -1,10 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import app from "../firebase/firebase.init";
 
 const AppContext = createContext();
 
 const ContextProvider = ({ children }) => {
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null)
   
 
   // fetch chefs data
@@ -25,9 +31,33 @@ const ContextProvider = ({ children }) => {
     chefsData();
   }, []);
 
+  const signWithGoogle = () => {
+    
+    return signInWithPopup(auth, googleProvider)
+  }
+
+  // logout function
+  const logOut = () =>{
+    return signOut(auth);
+}
+
+  // observe auth state change
+  useEffect( () =>{
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        console.log('auth state change', currentUser);
+        setUser(currentUser);
+        // setLoading(false);
+    });
+
+    return () =>{
+        unsubscribe();
+    }
+
+}, [])
+
 
   return (
-    <AppContext.Provider value={{ loading, data, chefsData, setLoading }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ loading, data, chefsData, setLoading, signWithGoogle, user, logOut }}>{children}</AppContext.Provider>
   );
 };
 
