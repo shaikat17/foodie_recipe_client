@@ -19,3 +19,7 @@ export const setRecipeDB = (ids) => {
      localStorage.setItem('recipeDB', ids)
     
 }
+
+export const deleteRecipeDB = () => {
+    localStorage.removeItem("recipeDB");
+}

@@ -18,6 +18,7 @@ import ChefRecipes from "./components/ChefRecipes.jsx";
 import Blog from "./pages/Blog.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
 import Pdf from "./pages/Pdf.jsx";
+import FavouriteRecipes from "./components/FavouriteRecipes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,16 @@ const router = createBrowserRouter([
   {
     path: "/pdf",
     element: <Pdf />
+  },
+  {
+    path: "/favourite_recipes",
+    element: <Layout />,
+    children: [
+      {
+        path: "/favourite_recipes",
+        element: <FavouriteRecipes />
+      }
+    ]
   }
 ]);
 

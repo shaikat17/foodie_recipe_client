@@ -59,6 +59,16 @@ const Navbar = () => {
             </li>
             {user && (
               <>
+              <li><NavLink
+            to="/favourite_recipes"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+            }
+          >
+            Favourite Recipe
+          </NavLink></li>
                 <img
                   className="h-14 w-14 rounded-cus"
                   src={user?.photoURL}
@@ -102,12 +112,23 @@ const Navbar = () => {
           </li>
           {user && (
             <>
+            <li><NavLink
+            to="/favourite_recipes"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+            }
+          >
+            Favourite Recipe
+          </NavLink></li>
               <img
                 className="h-14 w-14 rounded-cus"
                 src={user?.photoURL}
                 alt={user?.displayName}
                 title={user?.displayName}
               />
+              
             </>
           )}
         </ul>

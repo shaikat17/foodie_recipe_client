@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/Context';
 
 const Register = () => {
@@ -9,7 +9,9 @@ const Register = () => {
   const [photoUrl, setPhotoUrl] = useState('');
   const [error, setError] = useState('')
 
-  const { createUser, updateUserProfile } = useGlobalContext()
+  const navigate = useNavigate()
+
+  const { createUser, updateUserProfile, logOut } = useGlobalContext()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,6 +28,8 @@ const Register = () => {
       updateUserProfile(loggedUser, userName, photoUrl)
       .then(updateResult => console.log(updateResult))
       .catch(err => console.log(err))
+      logOut()
+      navigate("/login")
     })
     .catch(err => console.log(err))
   };
