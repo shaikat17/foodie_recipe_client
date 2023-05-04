@@ -33,7 +33,11 @@ function Login() {
       console.log(loggedUser)
       navigate(from, { replace: true })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      setLoading(false)
+      setError("Please Check Your Email Or Password")
+    })
   };
 
   // google Signin

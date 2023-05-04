@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useGlobalContext } from "../context/Context";
 
 const Navbar = () => {
@@ -121,6 +123,7 @@ const Navbar = () => {
           </NavLink>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import { toast } from 'react-toastify';
 import { useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import LazyLoad from "react-lazy-load";
@@ -12,6 +13,7 @@ const SingleRecipe = ({ recipe }) => {
   const handleDisable = (id) => {
     addID(id)
     setIsDisable(true)
+    toast.success("Recipe Added To Favourite List")
     // console.log(ids)
   }
 
