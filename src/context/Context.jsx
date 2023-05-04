@@ -1,5 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  GithubAuthProvider,
+} from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { getRecipeDB, setRecipeDB } from "../loader/LoaderFunctions";
 
@@ -8,26 +18,26 @@ const AppContext = createContext();
 const ContextProvider = ({ children }) => {
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dataLoading, setDataLoading] = useState(true);
-  const [user, setUser] = useState(null)
-  const ids = getRecipeDB() || []
+  const [user, setUser] = useState(null);
+  const ids = getRecipeDB() || [];
 
   // add item id to the ids and to the localStorage
   const addID = (id) => {
-    ids.push(id)
-    setRecipeDB(ids)
-  }
-  
+    ids.push(id);
+    setRecipeDB(ids);
+  };
 
   // fetch chefs data
   const chefsData = async () => {
     const response = await fetch(
       "https://foodie-server-shaikatpal56-gmailcom.vercel.app/chefs"
     );
-    
+
     const data = await response.json();
 
     // console.log(data);
@@ -40,55 +50,80 @@ const ContextProvider = ({ children }) => {
     chefsData();
   }, []);
 
+  // google signin
   const signWithGoogle = () => {
-    setLoading(true)
-    return signInWithPopup(auth, googleProvider)
-  }
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // github signin
+  const signWithGithub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
+  };
 
   // logout function
-  const logOut = () =>{
+  const logOut = () => {
     return signOut(auth);
-}
+  };
 
-const createUser = (email, pass) => {
-  setLoading(true)
-  return createUserWithEmailAndPassword(auth, email, pass)
-}
+  const createUser = (email, pass) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, pass);
+  };
 
-const signin = (email, pass) => {
-  setLoading(true)
-  return signInWithEmailAndPassword(auth, email, pass)
-}
+  const signin = (email, pass) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, pass);
+  };
 
-const updateUserProfile = (user, uName, photoUrl) => {
-  return updateProfile(user, {
-    displayName: uName, photoURL: photoUrl
-  })
-}
+  const updateUserProfile = (user, uName, photoUrl) => {
+    return updateProfile(user, {
+      displayName: uName,
+      photoURL: photoUrl,
+    });
+  };
   // observe auth state change
-  useEffect( () =>{
+  useEffect(() => {
     // setLoading(true)
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-        // console.log('auth state change', currentUser);
-        setUser(currentUser);
-        setLoading(false)
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log('auth state change', currentUser);
+      setUser(currentUser);
+      setLoading(false);
     });
 
-    return () =>{
-        unsubscribe();
-    }
-
-}, [])
-
-
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
-    <AppContext.Provider value={{ loading, data, chefsData, setLoading, signWithGoogle, user, logOut, createUser, signin, updateUserProfile, dataLoading, setDataLoading, ids, addID }}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        loading,
+        data,
+        chefsData,
+        setLoading,
+        signWithGoogle,
+        user,
+        logOut,
+        createUser,
+        signin,
+        updateUserProfile,
+        dataLoading,
+        setDataLoading,
+        ids,
+        addID,
+        signWithGithub,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
   );
 };
 
 export const useGlobalContext = () => {
-    return useContext(AppContext)
-}
+  return useContext(AppContext);
+};
 
-export { AppContext, ContextProvider }
+export { AppContext, ContextProvider };

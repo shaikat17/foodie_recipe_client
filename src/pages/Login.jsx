@@ -15,7 +15,7 @@ function Login() {
 
   const from = location.state?.from?.pathname || '/'
 
-  const { signWithGoogle, user, setLoading, loading, signin } = useGlobalContext();
+  const { signWithGoogle, user, setLoading, loading, signin, signWithGithub } = useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,9 +36,23 @@ function Login() {
     .catch(err => console.log(err))
   };
 
+  // google Signin
   const handleGoogleSignin = () => {
     // setLoading(true)
     signWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate(from, { replace: true })
+        // setLoading(false)
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // github signin
+  const handleGithubSignin = () => {
+    // setLoading(true)
+    signWithGithub()
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
@@ -80,7 +94,7 @@ function Login() {
           >
             <FcGoogle /> Sign In with Google
           </NavLink>
-          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center">
+          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center" onClick={handleGithubSignin}>
             <FaGithub /> Sign In with Github
           </NavLink>
         </div>
