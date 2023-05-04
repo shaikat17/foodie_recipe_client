@@ -11,6 +11,9 @@ export default {
         cursive: ['cursive']
       },
     },
+    borderRadius: {
+      'cus': '100%',
+    }
   },
   plugins: [require("daisyui")],
 }

@@ -5,7 +5,7 @@ const Navbar = () => {
   const { user, logOut, loading } = useGlobalContext();
 
   const handleLogout = () => {
-    logOut()
+    logOut();
   };
   return (
     <div className="navbar bg-gray-100">
@@ -88,11 +88,23 @@ const Navbar = () => {
               Blog
             </NavLink>
           </li>
+          {user && (
+            <>
+              <img
+                className="h-14 w-14 rounded-cus"
+                src={user.photoURL}
+                alt={user.displayName}
+                title={user.displayName}
+              />
+            </>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
         {user ? (
-          <button className="btn" onClick={handleLogout}>Logout</button>
+          <button className="btn" onClick={handleLogout}>
+            Logout
+          </button>
         ) : (
           <NavLink className="btn" to="/login">
             Login
