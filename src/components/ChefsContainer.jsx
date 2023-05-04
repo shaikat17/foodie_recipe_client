@@ -4,7 +4,7 @@ import { ColorRing } from "react-loader-spinner";
 
 const ChefsContainer = () => {
 
-  const { loading, data } = useGlobalContext();
+  const { loading, data, dataLoading, setDataLoading } = useGlobalContext();
 
   return (
     <section className="my-7">
@@ -12,7 +12,7 @@ const ChefsContainer = () => {
         Our <span className="border-b-4 border-orange-500">Chefs</span>
       </h1>
       {loading ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center h-screen w-screen">
           <ColorRing
             visible={true}
             height="80"

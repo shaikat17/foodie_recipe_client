@@ -6,7 +6,7 @@ const SingleChef = ({ chef }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl">
       <figure className="w-2/4">
-        <img src={chef.image} className="h-full " alt="Movie" />
+        <img src={chef.image} className="h-full object-cover object-center" alt="Movie" />
       </figure>
       <div className="card-body">
         <div className="font-bold text-xl mb-2 flex items-center gap-2">Name: {chef.name}</div>

@@ -1,8 +1,21 @@
 
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import { useState } from "react";
+import { useGlobalContext } from "../context/Context";
 
 const SingleRecipe = ({ recipe }) => {
+  const { ids, addID } = useGlobalContext()
+  const [isDisable, setIsDisable] = useState(null)
+
+  const handleDisable = (id) => {
+    addID(id)
+    setIsDisable(true)
+    // console.log(ids)
+  }
+
+  // console.log(ids)
+
   return (
     <div className="card card-compact shadow-xl">
       <figure>
@@ -38,7 +51,7 @@ const SingleRecipe = ({ recipe }) => {
           />
         </div>
         <div className="card-actions justify-end mb-0 mt-3">
-          <button className="btn bg-orange-500 border-none">Add To Favourite</button>
+          <button className="btn bg-orange-500 border-none" disabled={isDisable || ids.includes(recipe.id)} onClick={() => handleDisable(recipe.id)}>Add To Favourite</button>
         </div>
       </div>
     </div>

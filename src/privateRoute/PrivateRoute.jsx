@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const PrivateRoute = ({ children }) => {
   const { user, loading, setLoading } = useGlobalContext();
   const location = useLocation();
-  console.log(loading);
+  // console.log(loading);
 
   // useEffect(() => {
   //   setLoading(false)
@@ -28,7 +28,7 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  console.log(user)
+  // console.log(user)
 
   if (user) {
     return children;

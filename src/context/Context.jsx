@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.init";
+import { getRecipeDB, setRecipeDB } from "../loader/LoaderFunctions";
 
 const AppContext = createContext();
 
@@ -10,7 +11,15 @@ const ContextProvider = ({ children }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
   const [user, setUser] = useState(null)
+  const ids = getRecipeDB() || []
+
+  // add item id to the ids and to the localStorage
+  const addID = (id) => {
+    ids.push(id)
+    setRecipeDB(ids)
+  }
   
 
   // fetch chefs data
@@ -23,11 +32,11 @@ const ContextProvider = ({ children }) => {
 
     // console.log(data);
     setData(data);
-    // setLoading(false);
+    setDataLoading(false);
   };
 
   useEffect(() => {
-    // setLoading(true);
+    setDataLoading(true);
     chefsData();
   }, []);
 
@@ -72,8 +81,9 @@ const updateUserProfile = (user, uName, photoUrl) => {
 }, [])
 
 
+
   return (
-    <AppContext.Provider value={{ loading, data, chefsData, setLoading, signWithGoogle, user, logOut, createUser, signin, updateUserProfile }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ loading, data, chefsData, setLoading, signWithGoogle, user, logOut, createUser, signin, updateUserProfile, dataLoading, setDataLoading, ids, addID }}>{children}</AppContext.Provider>
   );
 };
 
