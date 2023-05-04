@@ -17,6 +17,7 @@ import Layout from "./layout/Layout.jsx";
 import ChefRecipes from "./components/ChefRecipes.jsx";
 import Blog from "./pages/Blog.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
+import Pdf from "./pages/Pdf.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/pdf",
+    element: <Pdf />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

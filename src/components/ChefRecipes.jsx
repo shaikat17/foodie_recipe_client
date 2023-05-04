@@ -1,4 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
+import LazyLoad from 'react-lazy-load';
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import { ColorRing } from "react-loader-spinner";
@@ -63,11 +64,13 @@ const ChefRecipes = () => {
     <>
       <div className="card card-side bg-base-100 shadow-xl p-3">
         <figure className="w-2/5">
+          <LazyLoad>
           <img
             src={chefData.image}
             className="h-full object-cover object-center "
             alt="Movie"
           />
+          </LazyLoad>
         </figure>
         <div className="card-body w-3/5">
           <div className="font-bold text-xl mb-2 flex items-center gap-2">

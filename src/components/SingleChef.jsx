@@ -1,12 +1,15 @@
 import React from "react";
 import {FcLike} from 'react-icons/fc'
+import LazyLoad from "react-lazy-load";
 import { NavLink } from "react-router-dom";
 
 const SingleChef = ({ chef }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl">
       <figure className="w-2/4">
+        <LazyLoad>
         <img src={chef.image} className="h-full object-cover object-center" alt="Movie" />
+        </LazyLoad>
       </figure>
       <div className="card-body">
         <div className="font-bold text-xl mb-2 flex items-center gap-2">Name: {chef.name}</div>

@@ -3,6 +3,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { useGlobalContext } from "../context/Context";
+import LazyLoad from "react-lazy-load";
 
 const SingleRecipe = ({ recipe }) => {
   const { ids, addID } = useGlobalContext()
@@ -19,7 +20,9 @@ const SingleRecipe = ({ recipe }) => {
   return (
     <div className="card card-compact shadow-xl">
       <figure>
+        <LazyLoad>
         <img src={recipe.image} alt={recipe.name} />
+        </LazyLoad>
       </figure>
       <div className="card-body">
         <div className="flex justify-between items-center">
