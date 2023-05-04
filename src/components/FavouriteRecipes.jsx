@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 import { ColorRing } from "react-loader-spinner";
 import { useGlobalContext } from "../context/Context";
 import LazyLoad from "react-lazy-load";
 import { Rating, Stack } from "@mui/material";
-import { deleteRecipeDB } from "../loader/LoaderFunctions";
+import { deleteItem, deleteRecipeDB, getRecipeDB } from "../loader/LoaderFunctions";
 
 const FavouriteRecipes = () => {
-  const [chefRecipes, setChefRecipes] = useState([]);
   const [favRecipes, setFavRecipes] = useState([]);
-  const { ids, dataLoading, setDataLoading, loading } = useGlobalContext();
-
-  const favList = () => {
-    const recipeList = [];
-    for (let id of ids) {
-        // console.log(chefRecipes)
-      const recipe = chefRecipes.find((item) => {
-        return item.id === id;
-        // console.log(item)
-      });
-      recipeList.push(recipe);
-    }
-    setFavRecipes([...recipeList]);
-    
-  }
+  const [state, setState] = useState(true)
+  const { dataLoading, setDataLoading, loading } = useGlobalContext();
+  const ids = getRecipeDB()
 
   const getRecipes = async () => {
     setDataLoading(true);
@@ -31,31 +19,47 @@ const FavouriteRecipes = () => {
     );
     const data = await response.json();
 
-    return data
+    // return data
+    if(data) {
+        const recipeList = [];
+    for (let id of ids) {
+      const recipe = data.find((item) => {
+        return item.id === id;
+        // console.log(item)
+      });
+      recipeList.push(recipe);
+    }
+    setFavRecipes([...recipeList]);
+    }
+    setDataLoading(false)
   };
 
   
 
   useEffect(() => {
-    // console.log('hello')
-    getRecipes().then(item => setChefRecipes(item))
+    getRecipes()
     // console.log(data)
     setDataLoading(false);
     // console.log(chefRecipes)
     
-  }, []);
-
-  useEffect(() => {
-    favList()
-  })
+  }, [state]);
 
  
 
   const deleteFavouriteList = () => {
     deleteRecipeDB();
+    // ids = []
+    toast.warn('Favourite Recipe List Deleted.')
+    setState(!state)
   };
 
-  if (loading) {
+  const handleDeleteItem = (id) => {
+    deleteItem(id)
+    toast.warn('Recipe Deleted From Favourite List.')
+    setState(!state)
+  }
+
+  if (dataLoading) {
     return (
       <div className="flex items-center justify-center">
         <ColorRing
@@ -73,7 +77,7 @@ const FavouriteRecipes = () => {
   
   return (
     <>
-    {/* <button className="btn m-5" onClick={deleteFavouriteList}>Delete Favourite List</button>
+    {favRecipes.length > 0 ?<> <button className="btn m-5" onClick={deleteFavouriteList}>Delete Favourite List</button>
     <div className="grid grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
     {favRecipes.map((recipe) => {
         return (
@@ -115,7 +119,7 @@ const FavouriteRecipes = () => {
                 />
             </div>
             <div className="card-actions justify-end mb-0 mt-3">
-                <button className="btn bg-orange-500 border-none">
+                <button className="btn bg-orange-500 border-none" onClick={() => handleDeleteItem(recipe.id)}>
                 Delete Recipe
                 </button>
             </div>
@@ -123,8 +127,8 @@ const FavouriteRecipes = () => {
         </div>
         );
     })}
-    </div> */}
-    <h1>{favList.length}</h1>
+    </div>
+    </> : <h1 className="text-5xl text-center my-10 font-black">No Data Found</h1>}
     </>
   );
 

@@ -24,13 +24,17 @@ const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [dataLoading, setDataLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const ids = getRecipeDB() || [];
+  
 
   // add item id to the ids and to the localStorage
-  const addID = (id) => {
-    ids.push(id);
-    setRecipeDB(ids);
-  };
+  // const addID = (id) => {
+  //   console.log(id)
+  //   let ids = getRecipeDB()
+  //   ids.push(id);
+  //   setRecipeDB(ids);
+
+  //   console.log(ids)
+  // };
 
   // fetch chefs data
   const chefsData = async () => {
@@ -112,8 +116,6 @@ const ContextProvider = ({ children }) => {
         updateUserProfile,
         dataLoading,
         setDataLoading,
-        ids,
-        addID,
         signWithGithub,
       }}
     >

@@ -6,13 +6,35 @@ export const chefsLoader = async () => {
 }
 
 export const getRecipeDB = () => {
+    let ids = []
     const data = localStorage.getItem('recipeDB')
     if(data) {
         const dataAr = data.split(',')
-        return dataAr.map(item => parseInt(item))
+        for(let id of dataAr) {
+            ids.push(Number(id))
+        }
     }
-    else localStorage.setItem('recipeDB', [])
-    
+
+    return ids
+}
+
+export const addToRecipeDB = (id) => {
+    let ids = getRecipeDB()
+
+    if(ids) {
+        ids.push(id)
+        setRecipeDB(ids)
+    }
+}
+
+export const deleteItem = (id) => {
+    let ids = getRecipeDB()
+    if(ids) {
+        const index = ids.indexOf(id)
+
+        if(index > -1) ids.splice(index, 1)
+    }
+    setRecipeDB(ids)
 }
 
 export const setRecipeDB = (ids) => {

@@ -5,13 +5,14 @@ import { toast } from 'react-toastify';
 import { useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import LazyLoad from "react-lazy-load";
+import { addToRecipeDB, getRecipeDB } from "../loader/LoaderFunctions";
 
 const SingleRecipe = ({ recipe }) => {
-  const { ids, addID } = useGlobalContext()
   const [isDisable, setIsDisable] = useState(null)
+  const ids = getRecipeDB()
 
   const handleDisable = (id) => {
-    addID(id)
+    addToRecipeDB(id)
     setIsDisable(true)
     toast.success("Recipe Added To Favourite List")
     // console.log(ids)
