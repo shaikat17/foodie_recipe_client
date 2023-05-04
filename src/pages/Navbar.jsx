@@ -55,6 +55,16 @@ const Navbar = () => {
                 Blog
               </NavLink>
             </li>
+            {user && (
+              <>
+                <img
+                  className="h-14 w-14 rounded-cus"
+                  src={user?.photoURL}
+                  alt={user?.displayName}
+                  title={user?.displayName}
+                />
+              </>
+            )}
           </ul>
         </div>
         <NavLink to="/" className="btn btn-ghost normal-case text-4xl">
@@ -92,9 +102,9 @@ const Navbar = () => {
             <>
               <img
                 className="h-14 w-14 rounded-cus"
-                src={user.photoURL}
-                alt={user.displayName}
-                title={user.displayName}
+                src={user?.photoURL}
+                alt={user?.displayName}
+                title={user?.displayName}
               />
             </>
           )}
