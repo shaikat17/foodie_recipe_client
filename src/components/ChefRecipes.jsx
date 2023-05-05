@@ -1,10 +1,11 @@
 import { NavLink, useParams } from "react-router-dom";
 import LazyLoad from "react-lazy-load";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import { ColorRing } from "react-loader-spinner";
 import { FcLike } from "react-icons/fc";
 import SingleRecipe from "./SingleRecipe";
+import { ThemeContext } from "../context/themeContext";
 
 const ChefRecipes = () => {
   const [chefData, setChefData] = useState({});
@@ -12,6 +13,7 @@ const ChefRecipes = () => {
   const { id } = useParams();
 
   const { dataLoading, setDataLoading } = useGlobalContext();
+  const { theme } = useContext(ThemeContext)
 
   // console.log(loading)
 
@@ -75,16 +77,16 @@ const ChefRecipes = () => {
           <div className="font-bold text-xl mb-2 flex items-center gap-2">
             Name: {chefData.name}
           </div>
-          <p className="text-gray-700 text-base mb-2">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} text-base mb-2`}>
             Experience: {chefData.experience} years of experience
           </p>
-          <p className="text-gray-700 text-base mb-2">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} text-base mb-2`}>
             Total Recipes: {chefData.numRecipes} recipes
           </p>
-          <p className="text-gray-700 text-base mb-2 flex items-center gap-2">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} text-base mb-2 flex items-center gap-2`}>
             <FcLike /> {chefData.likes}
           </p>
-          <p className="text-gray-700 text-base mb-2">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} text-base mb-2`}>
             Description: {chefData.bio}
           </p>
         </div>

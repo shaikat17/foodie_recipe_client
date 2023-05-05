@@ -57,7 +57,7 @@ const SingleRecipe = ({ recipe }) => {
           />
         </div>
         <div className="card-actions justify-end mb-0 mt-3">
-          <button className="btn bg-orange-500 border-none" disabled={isDisable || ids.includes(recipe.id)} onClick={() => handleDisable(recipe.id)}>Add To Favourite</button>
+          <button className="btn bg-orange-500 text-white border-none" disabled={isDisable || ids.includes(recipe.id)} onClick={() => handleDisable(recipe.id)}>Add To Favourite</button>
         </div>
       </div>
     </div>

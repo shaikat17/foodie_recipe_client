@@ -21,6 +21,7 @@ import Pdf from "./pages/Pdf.jsx";
 import FavouriteRecipes from "./components/FavouriteRecipes.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import UserDetails from "./pages/UserDetails.jsx";
+import { ThemeContextProvider } from "./context/themeContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -112,8 +113,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <ThemeContextProvider>
     <ContextProvider>
       <RouterProvider router={router} />
     </ContextProvider>
+    </ThemeContextProvider>
   </React.StrictMode>
 );

@@ -120,7 +120,7 @@ const FavouriteRecipes = () => {
                 />
             </div>
             <div className="card-actions justify-end mb-0 mt-3">
-                <button className="btn bg-orange-500 border-none" onClick={() => handleDeleteItem(recipe.id)}>
+                <button className="btn bg-orange-500 text-white border-none" onClick={() => handleDeleteItem(recipe.id)}>
                 Delete Recipe
                 </button>
             </div>

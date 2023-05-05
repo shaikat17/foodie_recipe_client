@@ -24,27 +24,27 @@ function UserDetails() {
         .catch(err => console.log(err))
     }
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
+    <div className="shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
       <div className="md:w-2/4">
       <div className="p-3">
         <div className="flex items-center mb-4">
           <img src={user.photoURL} alt="User" className="w-20 h-20 rounded-full mr-4" />
           <div>
             <h2 className="text-xl font-bold">{user.displayName}</h2>
-            <p className="text-gray-700 text-base">Software Engineer</p>
+            <p className="text-base">Software Engineer</p>
           </div>
         </div>
-        <p className="text-gray-700 text-base mb-4">
+        <p className="text-base mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit, eros ut gravida blandit, erat neque consequat ipsum, sit amet facilisis augue mi vel nisl. Nam sed augue ac metus elementum tincidunt in vel ipsum.
         </p>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-gray-500 font-bold text-sm">Email:</p>
-            <p className="text-gray-700 text-base">{user.email}</p>
+            <p className=" font-bold text-sm">Email:</p>
+            <p className=" text-base">{user.email}</p>
           </div>
           <div>
-            <p className="text-gray-500 font-bold text-sm">Phone:</p>
-            <p className="text-gray-700 text-base">+1 (555) 555-5555</p>
+            <p className=" font-bold text-sm">Phone:</p>
+            <p className=" text-base">+1 (555) 555-5555</p>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@ function UserDetails() {
       <div className="p-3 md:w-2/4">
         <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="user-name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="user-name" className="block text-sm font-medium">
                 User Name
               </label>
               <div className="mt-1">
@@ -71,7 +71,7 @@ function UserDetails() {
             </div>
 
             <div>
-              <label htmlFor="photo-url" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="photo-url" className="block text-sm font-medium ">
                 Photo URL
               </label>
               <div className="mt-1">

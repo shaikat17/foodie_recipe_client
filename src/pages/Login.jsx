@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { ColorRing } from "react-loader-spinner";
 import { useGlobalContext } from "../context/Context";
+import { ThemeContext } from "../context/themeContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { theme } = useContext(ThemeContext);
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/'
+  const from = location.state?.from?.pathname || "/";
 
-  const { signWithGoogle, user, setLoading, loading, signin, signWithGithub } = useGlobalContext();
+  const { signWithGoogle, user, setLoading, loading, signin, signWithGithub } =
+    useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,16 +32,16 @@ function Login() {
     }
 
     signin(email, password)
-    .then(result => {
-      const loggedUser = result.user
-      console.log(loggedUser)
-      navigate(from, { replace: true })
-    })
-    .catch(err => {
-      console.log(err)
-      setLoading(false)
-      setError("Please Check Your Email Or Password")
-    })
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setError("Please Check Your Email Or Password");
+      });
   };
 
   // google Signin
@@ -47,7 +51,7 @@ function Login() {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
         // setLoading(false)
       })
       .catch((error) => console.log(error));
@@ -60,7 +64,7 @@ function Login() {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
         // setLoading(false)
       })
       .catch((error) => console.log(error));
@@ -87,7 +91,7 @@ function Login() {
       <div className="max-w-md w-full space-y-8">
         <div>
           {error && <p className="text-red-600">{error}</p>}
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className={`${theme === 'dark' ? '' : 'text-gray-900'} mt-6 text-center text-3xl font-extrabold`}>
             Sign in to your account
           </h2>
         </div>
@@ -98,7 +102,10 @@ function Login() {
           >
             <FcGoogle /> Sign In with Google
           </NavLink>
-          <NavLink className="flex justify-around w-full border border-orange-500 p-2 items-center" onClick={handleGithubSignin}>
+          <NavLink
+            className="flex justify-around w-full border border-orange-500 p-2 items-center"
+            onClick={handleGithubSignin}
+          >
             <FaGithub /> Sign In with Github
           </NavLink>
         </div>
@@ -116,7 +123,7 @@ function Login() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -130,7 +137,7 @@ function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>

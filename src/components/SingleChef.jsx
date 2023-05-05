@@ -13,15 +13,15 @@ const SingleChef = ({ chef }) => {
       </figure>
       <div className="card-body">
         <div className="font-bold text-xl mb-2 flex items-center gap-2">Name: {chef.name}</div>
-        <p className="text-gray-700 text-base mb-2">Experience: {chef.experience} years of experience
+        <p className="text-base mb-2">Experience: {chef.experience} years of experience
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className=" text-base mb-2">
           Total Recipes: {chef.numRecipes} recipes
         </p>
-        <p className="text-gray-700 text-base mb-2 flex items-center gap-2">
+        <p className=" text-base mb-2 flex items-center gap-2">
           <FcLike /> { chef.likes}
         </p>
-        <NavLink to={`/chef-recipes/${chef.id}`} className="btn bg-orange-500 border-none">
+        <NavLink to={`/chef-recipes/${chef.id}`} className="btn bg-orange-500 text-white border-none">
           View Recipes
         </NavLink>
       </div>

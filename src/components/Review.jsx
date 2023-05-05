@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import { ThemeContext } from "../context/themeContext";
 
 const reviews = [
   {
@@ -42,34 +43,42 @@ const reviews = [
 ];
 
 const ReviewsSection = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div className="bg-gray-100 py-10">
+    <div className={`${theme === "dark" ? "py-10" : "bg-gray-100 py-10"}`}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-orange-500 mb-8 "><span className="border-b-4 border-orange-500">Reviews</span></h2>
+        <h2 className="text-3xl font-bold text-orange-500 mb-8 ">
+          <span className="border-b-4 border-orange-500">Reviews</span>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="bg-white rounded p-6 shadow-md hover:shadow-lg"
+              className={`${
+                theme === "dark"
+                  ? "rounded-xl border border-white p-6 shadow-md hover:shadow-lg"
+                  : "bg-white rounded-xl p-6 shadow-md hover:shadow-lg"
+              }`}
             >
               <div className="flex items-center mb-4">
-                <div className="rounded-full bg-gray-500 h-8 w-8 flex items-center justify-center text-white font-bold text-sm" style={{borderRadius: '100%'}}>
+                <div
+                  className="rounded-full bg-gray-500 h-8 w-8 flex items-center justify-center text-white font-bold text-sm"
+                  style={{ borderRadius: "100%" }}
+                >
                   {review.name.charAt(0).toUpperCase()}
                 </div>
-                <div className="ml-2 text-gray-700 font-bold">
-                  {review.name}
-                </div>
+                <div className="ml-2 font-bold">{review.name}</div>
               </div>
-              <div className="text-gray-600 mb-4">{review.review}</div>
-              <div className="text-gray-700 font-bold">
-              <Stack spacing={1}>
-            <Rating
-              name="half-rating-read"
-              defaultValue={review.rating}
-              precision={0.5}
-              readOnly
-            />
-          </Stack>
+              <div className=" mb-4">{review.review}</div>
+              <div>
+                <Stack spacing={1}>
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={review.rating}
+                    precision={0.5}
+                    readOnly
+                  />
+                </Stack>
               </div>
             </div>
           ))}

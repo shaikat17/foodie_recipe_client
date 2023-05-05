@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import html2pdf from "html2pdf.js";
+import { ThemeContext } from "../context/themeContext";
 
 const Blog = () => {
+  const {theme} = useContext(ThemeContext)
     const sectionRef = useRef(null);
 
   const handleDownload = () => {
@@ -16,14 +18,14 @@ const Blog = () => {
     html2pdf().from(section).set(opt).save();
   };
   return (
-    <div className="bg-gray-100 py-10 border-t-2" ref={sectionRef}>
+    <div className={`${theme === 'dark' ? 'text-white' : 'bg-gray-100'} py-10 border-t-2`} ref={sectionRef}>
       <div className="container mx-auto px-4">
         <button className="btn mb-4" onClick={handleDownload}>Download Now</button>
         <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4"><span className="border-b-2 border-orange-500">
             Tell us the differences between uncontrolled and controlled components.</span>
           </h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
             In a controlled component, the form data is handled by a React
             component. The React component is responsible for rendering the form
             and managing its state. The form data is stored in the component's
@@ -37,7 +39,7 @@ const Blog = () => {
           <h3 className="text-2xl font-bold mb-4"><span className="border-b-2 border-orange-500">How to validate React props using PropTypes?</span>
             
           </h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
             PropTypes is a way to validate the props passed to a React component
             and to provide type checking. PropTypes can be used to ensure that
             the props passed to a component are of the correct type and that
@@ -52,7 +54,7 @@ const Blog = () => {
           <h3 className="text-2xl font-bold mb-4"><span className="border-b-2 border-orange-500">Tell us the difference between Node.js and Express.js.</span>
             
           </h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
             Node.js is a server-side JavaScript runtime environment that allows
             you to run JavaScript on the server. Express.js is a web framework
             for Node.js that provides additional features and functionality for
@@ -64,7 +66,7 @@ const Blog = () => {
 
         <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4"><span className="border-b-2 border-orange-500">What is a custom hook?</span></h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
             A custom hook is a function in React that allows you to reuse
             functionality across multiple components. Custom hooks are created
             using the use keyword, followed by the name of the hook. A custom
@@ -79,12 +81,12 @@ const Blog = () => {
           <h3 className="text-2xl font-bold mb-4"><span className="border-b-2 border-orange-500">Why will you create a custom hook?</span>
             
           </h3>
-          <p className="text-gray-700 leading-relaxed">
+          <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
             You would create a custom hook to encapsulate complex logic and
             provide a simplified API to other components. Custom hooks allow you
             to reuse functionality across multiple components without repeating
             code    </p>
-      <p className="text-gray-700 leading-relaxed">
+      <p className={`${theme === 'dark' ? '' : 'text-gray-700'} leading-relaxed`}>
         Custom hooks can also help make your code more modular and
         maintainable. By encapsulating complex logic in a custom hook, you
         can create a simpler and more focused API for other components to

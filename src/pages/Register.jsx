@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/Context';
+import { ThemeContext } from '../context/themeContext';
 
 const Register = () => {
     const [userName, setUserName] = useState('');
@@ -8,6 +9,8 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const [error, setError] = useState('')
+
+  const {theme} = useContext(ThemeContext)
 
   const navigate = useNavigate()
 
@@ -38,14 +41,14 @@ const Register = () => {
     <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
       {error && <p className="text-red-600">{error}</p>}
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create an account</h2>
+        <h2 className={`${theme === 'dark' ? '' : 'text-gray-900'} mt-6 text-center text-3xl font-extrabold`}>Create an account</h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className=" py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="user-name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="user-name" className="block text-sm font-medium">
                 User Name
               </label>
               <div className="mt-1">
@@ -64,7 +67,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email-address" className="block text-sm font-medium">
                 Email address
               </label>
               <div className="mt-1">
@@ -83,7 +86,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="photo-url" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="photo-url" className="block text-sm font-medium">
                 Photo URL
               </label>
               <div className="mt-1">
@@ -102,7 +105,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium">
                 Password
               </label>
               <div className="mt-1">

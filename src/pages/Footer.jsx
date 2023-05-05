@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/themeContext";
 
 const Footer = () => {
+  const {theme} = useContext(ThemeContext)
+
   return (
-    <footer className="bg-orange-500 flex flex-col text-white md:p-7">
+    <footer className={`${theme === 'dark' ? ' border-t flex flex-col text-white md:p-7' :'bg-orange-500 flex flex-col text-white md:p-7'}`}>
       <div className="flex flex-col md:flex-row items-center justify-center space-y-4">
         <div className="md:w-2/4 flex items-center flex-col space-y-4 p-5 md:border-r">
           <h1 className="text-3xl font-bold">About Foodie</h1>
