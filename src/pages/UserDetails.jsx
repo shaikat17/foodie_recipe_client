@@ -4,19 +4,22 @@ import { useGlobalContext } from "../context/Context";
 import { getAuth } from "firebase/auth";
 
 function UserDetails() {
-    const { user, updateUserProfile } = useGlobalContext()
+    const { updateUserProfile, setLoading } = useGlobalContext()
+
+    const auth = getAuth()
+
+    const user = auth.currentUser
 
     const [userName, setUserName] = useState(user.displayName)
     const [photoUrl, setPhotoUrl] = useState(user.photoURL)
-
-    const auth = getAuth()
     
-
-    const handleSubmit = () => {
-        updateUserProfile( auth.currentUser, userName, photoUrl)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        updateUserProfile( user, userName, photoUrl)
         .then(() => {
             toast.success('Profile Update Successful.')
-            console.log('updated')
+            // console.log('updated')
+            setLoading(false)
         })
         .catch(err => console.log(err))
     }
