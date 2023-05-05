@@ -77,6 +77,7 @@ const FavouriteRecipes = () => {
   
   return (
     <>
+    <h1 className="text-center my-5 text-4xl font-black"><span className="border-orange-500 border-b-2">Favourite Recipe List</span></h1>
     {favRecipes.length > 0 ?<> <button className="btn m-5" onClick={deleteFavouriteList}>Delete Favourite List</button>
     <div className="grid grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
     {favRecipes.map((recipe) => {

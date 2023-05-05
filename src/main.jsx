@@ -19,6 +19,7 @@ import Blog from "./pages/Blog.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
 import Pdf from "./pages/Pdf.jsx";
 import FavouriteRecipes from "./components/FavouriteRecipes.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,16 @@ const router = createBrowserRouter([
       {
         path: "/favourite_recipes",
         element: <FavouriteRecipes />
+      }
+    ]
+  },
+  {
+    path: "/aboutus",
+    element: <Layout />,
+    children: [
+      {
+        path: "/aboutus",
+        element: <AboutUs />
       }
     ]
   }

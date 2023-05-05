@@ -56,6 +56,18 @@ const Navbar = () => {
               >
                 Blog
               </NavLink>
+            </li> 
+            <li>
+              <NavLink
+                to="/aboutus"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                    : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+                }
+              >
+                About Us
+              </NavLink>
             </li>
             {user && (
               <>
@@ -110,6 +122,18 @@ const Navbar = () => {
               Blog
             </NavLink>
           </li>
+          <li>
+              <NavLink
+                to="/aboutus"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-transparent ml-2 uppercase text-orange-500 font-medium"
+                    : "bg-transparent ml-2 uppercase text-gray-700 font-medium"
+                }
+              >
+                About Us
+              </NavLink>
+            </li>
           {user && (
             <>
             <li><NavLink
