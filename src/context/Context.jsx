@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   GithubAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { getRecipeDB, setRecipeDB } from "../loader/LoaderFunctions";
@@ -81,6 +82,10 @@ const ContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, pass);
   };
 
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email)
+  }
+
   const updateUserProfile = (user = user, uName, photoUrl) => {
     setLoading(true)
     return updateProfile(user, {
@@ -118,6 +123,7 @@ const ContextProvider = ({ children }) => {
         dataLoading,
         setDataLoading,
         signWithGithub,
+        resetPassword
       }}
     >
       {children}

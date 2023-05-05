@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { ColorRing } from "react-loader-spinner";
@@ -18,14 +19,14 @@ function Login() {
 
   const from = location.state?.from?.pathname || "/";
 
-  const { signWithGoogle, user, setLoading, loading, signin, signWithGithub } =
+  const { signWithGoogle, user, setLoading, loading, signin, signWithGithub, resetPassword } =
     useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setError("");
-    console.log(`Email: ${email} Password: ${password}`);
+    // console.log(`Email: ${email} Password: ${password}`);
     if (password.length < 6) {
       setError("Your Password should be more than or equal to 6 characters");
       return;
@@ -34,7 +35,7 @@ function Login() {
     signin(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -50,7 +51,7 @@ function Login() {
     signWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
         navigate(from, { replace: true });
         // setLoading(false)
       })
@@ -63,12 +64,28 @@ function Login() {
     signWithGithub()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
         navigate(from, { replace: true });
         // setLoading(false)
       })
       .catch((error) => console.log(error));
   };
+
+  const handleResetPassword = () => {
+    setError('')
+    if(email.length < 1) {
+      setError('Please Enter Your Email To Reset Password')
+      return
+    }
+    resetPassword(email)
+    .then(() => {
+      toast.info('Please Check Your Email')
+    })
+    .catch((error) => {
+      console.log(err)
+    });
+  
+  }
 
   if (loading) {
     return (
@@ -155,12 +172,11 @@ function Login() {
             </div>
 
             <div className="text-sm">
-              <a
-                href="#"
+              <NavLink onClick={handleResetPassword}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                Forgot your password?
-              </a>
+                Reset your password?
+              </NavLink>
             </div>
           </div>
 
