@@ -81,7 +81,7 @@ const ContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, pass);
   };
 
-  const updateUserProfile = (user, uName, photoUrl) => {
+  const updateUserProfile = (user = user, uName, photoUrl) => {
     return updateProfile(user, {
       displayName: uName,
       photoURL: photoUrl,

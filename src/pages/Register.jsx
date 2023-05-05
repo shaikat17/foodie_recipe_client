@@ -24,7 +24,7 @@ const Register = () => {
     createUser(email, password)
     .then(result => {
       const loggedUser = result.user
-      console.log(loggedUser)
+      // console.log(loggedUser)
       updateUserProfile(loggedUser, userName, photoUrl)
       .then(updateResult => console.log(updateResult))
       .catch(err => console.log(err))

@@ -17,7 +17,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="md:w-2/4 flex items-center flex-col space-y-4 p-5">
-          <h1 className="text-3xl font-bold">stay updated</h1>
+          <h1 className="text-3xl font-bold">Stay Updated</h1>
           <p>
             Register your email address to get promos, product updates and other
             info.

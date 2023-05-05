@@ -81,12 +81,14 @@ const Navbar = () => {
           >
             Favourite Recipe
           </NavLink></li>
-                <img
-                  className="h-14 w-14 rounded-cus"
-                  src={user?.photoURL}
-                  alt={user?.displayName}
-                  title={user?.displayName}
-                />
+          <NavLink to="/userdetails">
+              <img
+                className="h-14 w-14 rounded-cus"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                title={user?.displayName}
+              />
+              </NavLink>
               </>
             )}
           </ul>
@@ -146,12 +148,14 @@ const Navbar = () => {
           >
             Favourite Recipe
           </NavLink></li>
+              <NavLink to="/userdetails">
               <img
                 className="h-14 w-14 rounded-cus"
                 src={user?.photoURL}
                 alt={user?.displayName}
                 title={user?.displayName}
               />
+              </NavLink>
               
             </>
           )}
