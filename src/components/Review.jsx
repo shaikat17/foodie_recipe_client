@@ -3,6 +3,18 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { ThemeContext } from "../context/themeContext";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+// import "./styles.css";
+
+// import required modules
+import { Pagination, Autoplay } from "swiper";
+
+
 const reviews = [
   {
     name: "John Smith",
@@ -50,7 +62,48 @@ const ReviewsSection = () => {
         <h2 className="text-3xl font-bold text-orange-500 mb-8 ">
           <span className="border-b-4 border-orange-500">Reviews</span>
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div>
+        <Swiper
+        slidesPerView={"auto"}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination]}
+        className="mySwiper"
+      >
+        {reviews.map((review, index) => <SwiperSlide key={index}>
+          <div className="flex items-center justify-center p-20 flex-col">
+        <div className="flex items-center mb-4">
+        <div
+                  className="rounded-full bg-gray-500 h-8 w-8 flex items-center justify-center text-white font-bold text-sm"
+                  style={{ borderRadius: "100%" }}
+                >
+                  {review.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="ml-2 font-bold">{review.name}</div>
+                </div>
+                <div className=" mb-4">{review.review}</div>
+                <div>
+                <Stack spacing={1}>
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={review.rating}
+                    precision={0.5}
+                    readOnly
+                  />
+                </Stack>
+              </div>
+                </div>
+        </SwiperSlide>)}
+        
+      </Swiper>
+        </div>
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
             <div
               key={index}
@@ -82,7 +135,7 @@ const ReviewsSection = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
