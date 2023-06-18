@@ -1,6 +1,7 @@
 
 import Banner from '../components/Banner';
 import ChefsContainer from '../components/ChefsContainer';
+import CookTogether from '../components/CookTogether';
 import ReviewsSection from '../components/Review';
 import SpecialFeaturs from '../components/SpecialFeaturs';
 
@@ -12,6 +13,7 @@ const Home = () => {
             <ChefsContainer />
             <SpecialFeaturs />
             <ReviewsSection />
+            <CookTogether />
         </div>
     );
 };
